@@ -1,5 +1,15 @@
-
 <?php
+  function redirect_to($new_location){
+      header('Location: '.$new_location);
+      exit;
+  }
+
+  function mysql_prep($string)
+  {
+    global $connection;
+    $escapr_string = mysqli_real_escape_string($connection, $string);
+    return $escapr_string;
+  }
 
   function confirm_query($result_set)  {
       if (!$result_set) {
