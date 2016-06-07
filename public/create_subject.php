@@ -1,6 +1,7 @@
 <?php require_once("../includes/session.php"); ?>
 <?php require_once('../includes/db_connection.php'); ?>
 <?php require_once('../includes/functions.php'); ?>
+<?php require_once('../includes/validation_functions.php'); ?>
 
 <?php
 
@@ -10,6 +11,17 @@
     $menu_name = mysql_prep(trim($_POST["menu_name"]));
     $position = (int) trim($_POST["position"]);
     $visible = (int) trim($_POST["visible"]);
+
+    // validations
+    $required_fields = array("menu_name", "position", "visible");
+    validate_presences($required_fields);
+    $field_with_max_lengths = array("menu_name" => 30);
+    validate_max_lengths($field_with_max_lengths);
+
+    if (!empty($errors)) {
+      $_SESSION["errors"] = $errors;
+      redirect_to("new_subject.php");
+    }
 
     $query = 'INSERT INTO ';
     $query .= 'subjects ';

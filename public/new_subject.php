@@ -10,6 +10,8 @@
   </div>
   <div id="page">
     <?php echo message(); ?>
+    <?php $errors = errors(); ?>
+    <?php echo form_errors($errors); ?>
     <h2>Create Subject</h2>
 		<form action="create_subject.php" method="post">
 		  <p>Menu name:
@@ -33,6 +35,8 @@
 		  </p>
 		  <input type="submit" name="submit" value="Create Subject" />
 		</form>
+    <br/>
+    <a href="manage_content.php">Cancel</a>
   </div>
 </div>
 <?php include('../includes/layouts/footer.php'); ?>
